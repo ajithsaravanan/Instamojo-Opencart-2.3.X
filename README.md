@@ -24,11 +24,11 @@ For auto-installation rename the file to use the extension `ocmod.zip`, for exam
 1. Copy the contents of `upload` directory(the folders inside upload directory in plugin) into your OpenCart installation root directory.
 2. Navigate to `Extensions > Extensions` from admin panel menu and select `Payments` in the dropdown.
 3. Look for the Instamojo in Payments List.
-4. Click on green Install button(the button have + icon).
+4. Click on green Install button(the button has `+` icon).
 
 ## Configuration
 
-1. After installation click on edit button corresponding to Instamojo module(the button have pencil icon).
+1. After installation click on edit button corresponding to Instamojo module(the button has pencil icon).
 2. Fill the following details:
 
     - **Order Status :** This is the order of the status that you would like to set after a successful payment.
