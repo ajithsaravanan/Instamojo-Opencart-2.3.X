@@ -1,16 +1,16 @@
 <?php
-class ControllerPaymentInstamojo extends Controller {
+class ControllerExtensionPaymentInstamojo extends Controller {
   private $error = array();
  
   public function index() {
-    $this->language->load('payment/instamojo');
+    $this->language->load('extension/payment/instamojo');
     $this->document->setTitle('Instamojo Payment Method Configuration');
     $this->load->model('setting/setting');
  
     if (($this->request->server['REQUEST_METHOD'] == 'POST') and $this->validate()) {
       $this->model_setting_setting->editSetting('instamojo', $this->request->post);
-      $this->session->data['success'] = 'Saved.';
-      $this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
+      $this->session->data['success'] = $this->language->get('text_success'); 
+      $this->response->redirect($this->url->link('extension/extension', 'token=' . $this->session->data['token'], 'SSL'));
     }
 	
 	
@@ -40,8 +40,8 @@ class ControllerPaymentInstamojo extends Controller {
     $data['entry_sort_order'] = $this->language->get('entry_sort_order');
     
  
-    $data['action'] = $this->url->link('payment/instamojo', 'token=' . $this->session->data['token'], 'SSL');
-    $data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
+    $data['action'] = $this->url->link('extension/payment/instamojo', 'token=' . $this->session->data['token'], 'SSL');
+    $data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'], 'SSL');
 
     if (isset($this->request->post['instamojo_checkout_label'])) {
       $data['instamojo_checkout_label'] = $this->request->post['instamojo_checkout_label'];
@@ -97,13 +97,13 @@ class ControllerPaymentInstamojo extends Controller {
             );
 
     $data['breadcrumbs'][] = array(
-      'text' => 'Payment',
-      'href' => $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL')
+      'text' => $this->language->get('text_extension'),
+      'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true)
     );
 
     $data['breadcrumbs'][] = array(
       'text' => $this->language->get('heading_title'),
-      'href' => $this->url->link('payment/instamojo', 'token=' . $this->session->data['token'], 'SSL')
+      'href' => $this->url->link('extension/payment/instamojo', 'token=' . $this->session->data['token'], 'SSL')
     );
 
 
@@ -111,11 +111,11 @@ class ControllerPaymentInstamojo extends Controller {
     $data['column_left'] = $this->load->controller('common/column_left');
     $data['footer'] = $this->load->controller('common/footer'); 
 
-    $this->response->setOutput($this->load->view('payment/instamojo.tpl', $data));
+    $this->response->setOutput($this->load->view('extension/payment/instamojo.tpl', $data));
   }
   
   private function validate() {
-		if (!$this->user->hasPermission('modify', 'payment/instamojo')) {
+		if (!$this->user->hasPermission('modify', 'extension/payment/instamojo')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 

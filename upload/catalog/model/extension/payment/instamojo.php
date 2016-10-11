@@ -1,7 +1,7 @@
 <?php
-class ModelPaymentInstamojo extends Model {
+class ModelExtensionPaymentInstamojo extends Model {
   public function getMethod($address, $total) {
-    $this->load->language('payment/instamojo');
+    $this->load->language('extension/payment/instamojo');
     $this->load->model('setting/setting');
 
     $checkout_label = $this->config->get('instamojo_checkout_label');

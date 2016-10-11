@@ -5,6 +5,7 @@ $_['text_instamojo'] = '<a href="https://www.instamojo.com"><img src="../image/i
 $_['text_enabled'] = 'Enabled';
 $_['text_disabled'] = 'Disabled';
 $_['text_edit'] = 'Edit Instamojo Payment method'; 
+$_['text_success'] = 'Success: You have modified Instamojo Payment method';
 
 $_['instamojo_checkout_label'] = 'Checkout Label';
 $_['instamojo_client_id'] = 'Client ID';

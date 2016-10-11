@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . "/lib/Instamojo.php";
 
-class ControllerPaymentInstamojo extends Controller {
+class ControllerExtensionPaymentInstamojo extends Controller {
 
   private $logger;
 
@@ -43,7 +43,7 @@ class ControllerPaymentInstamojo extends Controller {
 		$api_data['phone'] 			= substr(html_entity_decode($order_info['telephone'], ENT_QUOTES, 'UTF-8'), 0, 20);
 		$api_data['amount'] 		= $this->currency->format($order_info['total'], $order_info['currency_code'] , false, false);
 		$api_data['currency'] 		= "INR";
-		$api_data['redirect_url'] 	= $this->url->link('payment/instamojo/confirm');
+		$api_data['redirect_url'] 	= $this->url->link('extension/payment/instamojo/confirm');
 		$api_data['transaction_id'] = time()."-". $this->session->data['order_id'];
 		
 		try{
@@ -77,14 +77,10 @@ class ControllerPaymentInstamojo extends Controller {
 		$method_data['header'] 		= $this->load->controller('common/header');
        
 	   
-	    if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/instamojo/instamojo_redirect.tpl')){
+	    if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/extension/payment/instamojo/instamojo_redirect.tpl')){
 			$this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/payment/instamojo/instamojo_redirect.tpl',$method_data));
 		}else{
-			# only path changed if default version is there.
-			if(version_compare(VERSION, '2.2.0.0', '<')) 
-				$this->response->setOutput($this->load->view( 'default/template/payment/instamojo/instamojo_redirect.tpl',$method_data));
-			else
-			   $this->response->setOutput($this->load->view("payment/instamojo/instamojo_redirect.tpl",$method_data));
+			$this->response->setOutput($this->load->view("extension/payment/instamojo/instamojo_redirect.tpl",$method_data));
 		}
 		
 	}else{
@@ -97,16 +93,12 @@ class ControllerPaymentInstamojo extends Controller {
   
   public function index(){
 	# make customer redirect to the payment/instamojo/start for avoiding problem releted to Journal2.6.x Quickcheckout
-	$method_data['action'] = "payment/instamojo/start";
-	$this->logger->write("Step 1: Redirecting to  payment/instamojo/start");
-	if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/instamojo/instamojo.tpl')){
-			return $this->load->view($this->config->get('config_template') . '/template/payment/instamojo/instamojo.tpl',$method_data);
+	$method_data['action'] = "extension/payment/instamojo/start";
+	$this->logger->write("Step 1: Redirecting to payment/instamojo/start");
+	if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/extension/payment/instamojo/instamojo.tpl')){
+			return $this->load->view($this->config->get('config_template') . '/template/extension/payment/instamojo/instamojo.tpl',$method_data);
 	}else{
-		# only path changed if default version is there.
-		if(version_compare(VERSION, '2.2.0.0', '<')) 
-			return $this->load->view( 'default/template/payment/instamojo/instamojo.tpl',$method_data);
-		else
-		  return $this->load->view("payment/instamojo/instamojo.tpl",$method_data);
+		    return $this->load->view("extension/payment/instamojo/instamojo.tpl",$method_data);
 	}
   }
   
