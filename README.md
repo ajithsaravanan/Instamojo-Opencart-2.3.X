@@ -4,19 +4,21 @@ Tested on OpenCart 2.3.0.2
 
 ## Download:
 
-Download the zip from [latest release](https://github.com/Instamojo/Instamojo-OpenCart-2.3.X/releases/latest) section or download it from the [OpenCart Extensions website](http://www.opencart.com/index.php?route=extension/extension/info&extension_id=21984).
+Download `Instamojo-OpenCart-2.3.X.ocmod.zip` file from the [latest release](https://github.com/Instamojo/Instamojo-OpenCart-2.3.X/releases/latest) or download it from the [OpenCart Extensions website](http://www.opencart.com/index.php?route=extension/extension/info&extension_id=21984).
 
 **Note**: Don't download the files under **Downloads** section. They won't work.
+
 
 ## Installation
 
 #### Automatic Installation
 1. Go to Extensions > Extension installer.
-2. Click on upload and select Instamojo-OpenCart-2.3.X.ocmod.zip from your download directory.
+2. Click on upload and select Instamojo-OpenCart-2.3.X.ocmod.zip from your download directory
 3. Click on Continue button. 
 4. You will get the success notification if extension is properly installed.
 
 ***Note: if automatic installation fails you can try further manual installation steps.***
+
 
 #### Manual Installation:
 
