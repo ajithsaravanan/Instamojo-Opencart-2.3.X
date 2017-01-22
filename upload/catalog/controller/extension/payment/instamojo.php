@@ -93,13 +93,10 @@ class ControllerExtensionPaymentInstamojo extends Controller {
   
   public function index(){
 	# make customer redirect to the payment/instamojo/start for avoiding problem releted to Journal2.6.x Quickcheckout
-	$method_data['action'] = "extension/payment/instamojo/start";
-	$this->logger->write("Step 1: Redirecting to payment/instamojo/start");
-	if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/extension/payment/instamojo/instamojo.tpl')){
-			return $this->load->view($this->config->get('config_template') . '/template/extension/payment/instamojo/instamojo.tpl',$method_data);
-	}else{
-		    return $this->load->view("extension/payment/instamojo/instamojo.tpl",$method_data);
-	}
+	$method_data['action'] = $this->config->get('config_url') . 'index.php';
+    $method_data['confirm'] = 'extension/payment/instamojo/start';
+	$this->logger->write("Step 1: Redirecting to extension/payment/instamojo/start");
+    return $this->load->view("extension/payment/instamojo/instamojo.tpl", $method_data);
   }
   
   
