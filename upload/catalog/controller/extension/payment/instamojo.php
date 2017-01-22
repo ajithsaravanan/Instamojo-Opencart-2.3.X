@@ -17,7 +17,7 @@ class ControllerExtensionPaymentInstamojo extends Controller {
 	$client_secret 		= $this->config->get('instamojo_client_secret');
 	$testmode 			= $this->config->get('instamojo_testmode');
 	
-	$this->logger->write("Client Id: $client_id | Client Secret $client_secret | TestMode : $testmode");
+	$this->logger->write(sprintf("Client Id: %s | Client Secret: %s | TestMode : %s", substr($client_id, -4), substr($client_secret, -4), $testmode));
 	return  new Instamojo($client_id,$client_secret,$testmode);
   }
   
