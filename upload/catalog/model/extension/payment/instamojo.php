@@ -1,16 +1,15 @@
 <?php
 class ModelExtensionPaymentInstamojo extends Model {
   public function getMethod($address, $total) {
-    $this->load->language('extension/payment/instamojo');
+    $this->load->language('payment/instamojo');
     $this->load->model('setting/setting');
 
-    $checkout_label = $this->config->get('instamojo_checkout_label');
-
+    $checkout_label = $this->config->get('instamojo_checkout_label'); 
     $method_data = array(
       'code'     => 'instamojo',
-      'title'    =>  !empty($checkout_label) ? $checkout_label : 'Pay using Instamojo',
+      'title'    =>  !empty($checkout_label) ? $checkout_label : $this->language->get('text_title'),
       'terms'      => '',
-      'sort_order' => $this->config->get('custom_sort_order')
+      'sort_order' => $this->config->get('instamojo_sort_order')
     );
   
     return $method_data;
