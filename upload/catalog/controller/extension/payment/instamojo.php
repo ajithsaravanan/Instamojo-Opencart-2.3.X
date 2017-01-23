@@ -97,7 +97,7 @@ class ControllerExtensionPaymentInstamojo extends Controller {
 	$this->logger->write("Action URL: " . $method_data['action']);
     $method_data['confirm'] = 'extension/payment/instamojo/start';
 	$this->logger->write("Step 1: Redirecting to extension/payment/instamojo/start");
-    return $this->load->view("extension/payment/instamojo/instamojo.tpl", $method_data);
+	return $this->load->view('extension/payment/instamojo/instamojo', $method_data);
   }
   
   
