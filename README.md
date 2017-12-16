@@ -8,6 +8,11 @@ Download `Instamojo-OpenCart-2.3.X.ocmod.zip` file from the [latest release](htt
 
 **Note**: Don't download the files under **Downloads** section. They won't work.
 
+## Latest Update 
+
+1. Added Internal Currency Conversion. Now the total amount is converted to the value of the Default currency and passed to the plugin. Please set the Default currency as INR in your OpenCart settings.
+2. Added Product Description to the the order details. 
+
 
 ## Installation
 
