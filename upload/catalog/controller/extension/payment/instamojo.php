@@ -40,19 +40,17 @@ class ControllerExtensionPaymentInstamojo extends Controller {
 	    if ($order_info['currency_code'] != "INR"){
 
 		$this->load->model('localisation/currency');
-        $currencies = $this->model_localisation_currency->getCurrencies();
+        	$currencies = $this->model_localisation_currency->getCurrencies();
 
         foreach ($currencies as $currency) { 
 			if ($currency['code'] == $order_info['currency_code']) { 
-            $order_info['total'] == (float) ($order_info['total'] / $currency['value']) ; 
-            $order_info['total'] = round($order_info['total'],2);
-            }
-        }
-    }    
-
-    else{
+            		$order_info['total'] == (float) ($order_info['total'] / $currency['value']) ; 
+            		$order_info['total'] = round($order_info['total'],2);
+            		}
+       		 }
+   	     }else{
     	$order_info['total'] = round($order_info['total'],2);
-    }    
+    	}    
 
    $products = $this->cart->getProducts();
    $api_data['description'] = " ";
@@ -61,12 +59,10 @@ class ControllerExtensionPaymentInstamojo extends Controller {
         $api_data['description'] = html_entity_decode($values['name']." - ".$values['quantity']." ".$api_data['description'], ENT_QUOTES, 'UTF-8');
     	}
 
-	    $session_url    =  $this->config->get('config_url');
-	    $session_orderid   =  $this->session->data['order_id'];
-
-		$api_data['description'] = html_entity_decode($api_data['description']."("."Order ID: ".$session_orderid.") (".$session_url.")", ENT_QUOTES, 'UTF-8');
+    $session_url    =  $this->config->get('config_url');
+    $session_orderid   =  $this->session->data['order_id'];
+    $api_data['description'] = html_entity_decode($api_data['description']."("."Order ID: ".$session_orderid.") (".$session_url.")", ENT_QUOTES, 'UTF-8');
 		
-
     if ($order_info) {
 
 		$api_data['name'] = substr(trim((html_entity_decode($order_info['payment_firstname'] . ' ' . $order_info['payment_lastname'], ENT_QUOTES, 'UTF-8'))), 0, 20);
