@@ -40,18 +40,17 @@ class ControllerExtensionPaymentInstamojo extends Controller {
 	    if ($order_info['currency_code'] != "INR"){
 
 		$this->load->model('localisation/currency');
-        	$currencies = $this->model_localisation_currency->getCurrencies();
+        $currencies = $this->model_localisation_currency->getCurrencies();
 
         foreach ($currencies as $currency) { 
 			if ($currency['code'] == $order_info['currency_code']) { 
-            		$order_info['total'] == (float) ($order_info['total'] / $currency['value']) ; 
-            		$order_info['total'] = round($order_info['total'],2);
-			break;
-            		}
-       		 }
-   	     }else{
-    	$order_info['total'] = round($order_info['total'],2);
-    	}    
+            $order_info['total'] == (float) ($order_info['total'] / $currency['value']) ; 
+            break;
+            }
+        }
+    }    
+
+    $order_info['total'] = round($order_info['total'],2);   
 
    $products = $this->cart->getProducts();
    $api_data['description'] = " ";
@@ -60,10 +59,12 @@ class ControllerExtensionPaymentInstamojo extends Controller {
         $api_data['description'] = html_entity_decode($values['name']." - ".$values['quantity']." ".$api_data['description'], ENT_QUOTES, 'UTF-8');
     	}
 
-    $session_url    =  $this->config->get('config_url');
-    $session_orderid   =  $this->session->data['order_id'];
-    $api_data['description'] = html_entity_decode($api_data['description']."("."Order ID: ".$session_orderid.") (".$session_url.")", ENT_QUOTES, 'UTF-8');
+	    $session_url    =  $this->config->get('config_url');
+	    $session_orderid   =  $this->session->data['order_id'];
+
+		$api_data['description'] = html_entity_decode($api_data['description']."("."Order ID: ".$session_orderid.") (".$session_url.")", ENT_QUOTES, 'UTF-8');
 		
+
     if ($order_info) {
 
 		$api_data['name'] = substr(trim((html_entity_decode($order_info['payment_firstname'] . ' ' . $order_info['payment_lastname'], ENT_QUOTES, 'UTF-8'))), 0, 20);
@@ -121,7 +122,14 @@ class ControllerExtensionPaymentInstamojo extends Controller {
   
   public function index(){
 	# make customer redirect to the payment/instamojo/start for avoiding problem releted to Journal2.6.x Quickcheckout
-	$method_data['action'] = $this->config->get('config_url') . 'index.php';
+	if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) 
+ 	{
+ 	    $method_data['action'] = $this->config->get('config_ssl') . 'index.php'; 
+ 	}
+ 	else{
+ 	    $method_data['action'] = $this->config->get('config_url') . 'index.php'; 
+ 	}
+
 	$this->logger->write("Action URL: " . $method_data['action']);
     $method_data['confirm'] = 'extension/payment/instamojo/start';
 	$this->logger->write("Step 1: Redirecting to extension/payment/instamojo/start");
