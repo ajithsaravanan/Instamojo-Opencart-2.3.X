@@ -46,6 +46,7 @@ class ControllerExtensionPaymentInstamojo extends Controller {
 			if ($currency['code'] == $order_info['currency_code']) { 
             		$order_info['total'] == (float) ($order_info['total'] / $currency['value']) ; 
             		$order_info['total'] = round($order_info['total'],2);
+			break;
             		}
        		 }
    	     }else{
