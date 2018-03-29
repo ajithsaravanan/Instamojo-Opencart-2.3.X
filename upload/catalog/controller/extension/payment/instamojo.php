@@ -62,7 +62,7 @@ class ControllerExtensionPaymentInstamojo extends Controller {
 	    $session_url    =  $this->config->get('config_url');
 	    $session_orderid   =  $this->session->data['order_id'];
 
-		$api_data['description'] = html_entity_decode($api_data['description']."("."Order ID: ".$session_orderid.") (".$session_url.")", ENT_QUOTES, 'UTF-8');
+		$api_data['description'] = html_entity_decode($api_data['description']."("."Order ID: ".$session_orderid.")", ENT_QUOTES, 'UTF-8');
 		
 
     if ($order_info) {
